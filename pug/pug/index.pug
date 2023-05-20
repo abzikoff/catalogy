@@ -1,0 +1,200 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="css/main.css")
+        title Document
+    body 
+        h1(class="title" id="test") this pug tag
+            span(style="color: red") This span
+        h2.title.title-large#test this title h2
+        .container 
+            .row 
+                .col-lg-3 
+                    .logo 
+                        a(href="#") Custom logo
+                .col-lg-9
+                    ul 
+                        li
+                            a(href="#") Menu
+                        li
+                            a(href="#") Menu
+                        li
+                            a(href="#") Menu
+        .container
+            .row
+                .col-lg-3
+                    a.logo(href="#") Custom logo
+                .col-lg-9
+                    ul
+                        li
+                            a(href="#") Menu 1
+                        li
+                            a(href="#") Menu 2
+                        li
+                            a(href="#") Menu 3
+        - let test = "This string";
+        - let test2 = "<em>This string</em>";
+        h3 Lorem, #{test} ipsum dolor.
+
+        p. 
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto, inventore corporis eos ea saepe rerum? Iste facere esse magnam quidem.
+        h4 
+            |Lorem ipsum dolor 
+            span(style="color: red;") sit 
+            |amet.
+        
+        //- - let array = ["Birinchi", "Ikkinchi", "Uchinchi", "To'rtinchi"];
+
+        //- each shuSanoq, i in array
+        //-     p Xozirgi tanlov #{shuSanoq} Tartib raqami #{i+1}
+
+        - let array = ["BMW", "Bugatti", "Audi"];
+        ul 
+            each Car, li in array 
+                li I like #{Car} #{li+1}
+        
+        - let obj = { name: "Anvar", surname: "Ibragimov" };
+
+        .person 
+            each name, surName in obj
+                .person__name Name #{name} 
+                .person__surName surname #{surName}
+
+        - 
+            let list = [
+                {
+                    name: "Anvar",
+                    surName: "Ibragimov",
+                    age: 27
+                },
+                {
+                    name: "Sajar",
+                    surName: "Ahmedov",
+                    age: 30
+                },
+                {
+                    name: "Ivan",
+                    surName: "Ivanov",
+                    age: 32
+                },
+            ];
+
+        each baza in list
+            .person
+                .person__name Ismi:  #{baza.name}
+                .person__surName Familyasi: #{baza.surName}
+                .person__age Yoshi: #{baza.age}
+        
+        //- mixin title(text)     
+        //-     h1=text
+        
+        //- mixin desc(text)
+        //-     p=text
+
+        //- section.test 
+        //-     .test__conainer 
+        //-         +title("This about section")
+        //-         +desc("Lorem ipsum dolor sit amet.")
+        //- section.test2 
+        //-     .test__conainer 
+        //-         +title("This team section")
+        //-         +desc("Lorem, ipsum dolor.")
+        
+        - let raqam = 10;
+
+        if(raqam == 9)
+            p raqam to'g'ri
+        else if(raqam == 8)
+            p da endi raqam to'g'ri
+        else 
+            p raqam noto'g'ri
+
+        mixin btn(klas,text)
+            if(klas)
+                button.btn(class="btn-"+klas)=text 
+            else 
+                button.btn=text 
+        
+        section.yuu 
+            +btn("large","Order now")
+            +btn("","Order now")
+        
+        mixin title(font,text)     
+            if(font)
+                h1.title(class="title-"+font)=text 
+            else 
+                h1.title(class="title-"+font)=text 
+        
+        section.sky 
+            +title("large", "This is a title")
+            +title("", "This is a small title")
+            +title("medium", "This is a medium title")
+
+        mixin desc(font,text)
+            if(font)
+                p(class="desc-"+font)=text 
+            else 
+                p.desc=text
+
+        section.star
+            +desc("large", "This is a desc")
+            +desc("", "This is a small desc")
+
+        //- section.test 
+        //-     .test__conainer 
+        //-         +title("This about section")
+        //-         +desc("Lorem ipsum dolor sit amet.")
+        //- section.test2 
+        //-     .test__conainer 
+        //-         +title("This team section")
+        //-         +desc("Lorem, ipsum dolor.")
+
+
+        - 
+            let bollarBazasi = [
+                {
+                    name: "Ivan",
+                    age: 18,
+                    image: "https://picsum.photos/seed/1/300"
+                },
+                {
+                    name: "Jenya",
+                    age: 17
+                },
+                {
+                    name: "Anya",
+                    age: 19,
+                    image: "https://picsum.photos/seed/2/300"
+                },
+                {
+                    name: "Natasha",
+                    age: 19
+                }
+            ];
+        
+        mixin ruyxat(bollarBazasi)
+            .list 
+                .list__name= bollarBazasi.name
+                .list__age= bollarBazasi.age 
+                if(bollarBazasi.image)
+                    .list__img
+                        img(src=bollarBazasi.image, alt="img")
+        .test 
+            .test__title 
+                +title("Bollar ro'yhati")
+            .test__content 
+                each baza in bollarBazasi
+                    +ruyxat(baza)
+        
+
+        //- Uyga vazifa 
+        //- 1. Baza tuzamiz avto moshinalar tug'risida yani malumotlari
+            //- Moshina nomi, rangi, ishlabchiqarilgan yili, yuragan probegi, Rasmi
+        //- 2.Mixin
+        //- 3.Slayderda chiqarasila (Slick)
+        
+
+        script(src="lib/bootsrtap/js/bootstrap.min.js") 
